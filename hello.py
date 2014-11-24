@@ -8,7 +8,7 @@ def hello():
 
 @app.route('/messages', methods = ['POST'])
 def api_message():
-    return "JSON Message: " + json.dumps(request.json)
+    return json.dumps(request.json)
 
 if __name__ == '__main__':
     app.run(debug=True)
