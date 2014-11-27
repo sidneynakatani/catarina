@@ -9,7 +9,8 @@ def hello():
 
 @app.route('/test')
 def test():
-    return ConnectionFactory.create()
+    conn = ConnectionFactory()
+    return conn.create()
 
 @app.route('/messages', methods = ['POST'])
 def api_message():
