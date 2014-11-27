@@ -2,6 +2,7 @@ import psycopg2
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 
+
 # Create app
 app = Flask(__name__)
 app.config['DEBUG'] = True
