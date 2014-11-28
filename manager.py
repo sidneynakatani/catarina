@@ -11,11 +11,11 @@ from model.post import Author
 #db.session.commit()
 
 
-a = User.query.filter_by(first_name='a').first()
+a = User.query.filter_by(first_name='a', last_name='b').first()
 print a.last_name
 print a.active
 
-#mark_pilgrim = Author(name='Mark Pilgrim')
+#mark_pilgrim = Author(name='Mark')
 #mark_pilgrim.save()
 mark = Author.query.filter(Author.name == 'Mark Pilgrim').first()
 print mark.name
