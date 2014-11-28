@@ -20,7 +20,6 @@ SQLAlchemy==0.9.8
 WTForms==2.0.1
 Werkzeug==0.8.3
 aniso8601==0.82
-apt-xapian-index==0.45
 argparse==1.2.1
 beautifulsoup4==4.1.2
 blinker==1.3
