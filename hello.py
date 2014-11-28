@@ -1,14 +1,13 @@
-from flask import Flask,json,request
+from flask import Flask,request,jsonify
 from db.connectionfactory import ConnectionFactory
-from db.connectionfactory import db
 from model.user import User
-from flask import jsonify
+from model.post import Author
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return 'Hello World!'
+    return 'Hello!'
 
 @app.route('/test')
 def test():
@@ -17,12 +16,16 @@ def test():
 
 @app.route('/<name>')
 def hello_name(name):
-    user = User.query.filter_by(first_name=name).first()
-    return jsonify(first_name = user.first_name, last_name = user.last_name, active = user.active)
+    author = Author.query.filter(Author.name == name).first()
+    return jsonify(name = author.name)
 
-@app.route('/messages', methods = ['POST'])
-def api_message():
-    return json.dumps(request.json)
+@app.route('/auth', methods = ['POST'])
+def auth():
+    email = request.form['email'] 
+    password =  request.form['password']
+    user = User.query.filter_by(email = email, password = password).first()
+    return jsonify(auth = user.active)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
