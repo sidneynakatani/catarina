@@ -30,7 +30,6 @@ itsdangerous==0.24
 lxml==3.1.0
 numpy==1.7.1
 oauthlib==0.3.7
-oneconf==0.3.3
 passlib==1.6.2
 pexpect==2.4
 piston-mini-client==0.7.5
