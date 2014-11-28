@@ -43,8 +43,6 @@ pyinotify==0.9.3
 pymongo==2.7.1
 pyserial==2.6
 pysmbc==1.0.13
-python-apt==0.8.8ubuntu6
-python-debian==0.1.21-nmu2ubuntu1
 pytz==2014.4
 pyxdg==0.25
 reportlab==2.6
