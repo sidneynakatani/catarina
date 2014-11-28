@@ -49,8 +49,6 @@ reportlab==2.6
 requests==2.2.1
 simplejson==3.5.2
 six==1.7.0
-system-service==0.1.6
-unity-lens-photos==0.9
 wsgiref==0.1.2
 xdiagnose==3.5.1
 zope.interface==4.0.5
