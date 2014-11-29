@@ -20,3 +20,18 @@ class User(db.Model):
 	self.last_name = last_name
         self.active = active
 
+    
+    def is_authenticated(self):
+        return True
+
+ 
+    def is_active(self):
+        return True
+
+
+    def get_id(self):
+        return unicode(self.id)
+
+
+    def __repr__(self):
+        return '<User %r>' % (self.first_name)
