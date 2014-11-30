@@ -42,7 +42,7 @@ def auth():
     	#password =  request.form['password']
     	email = request.form.get('email','')
 	password = request.form.get('password','')
-	print 'POST Method'
+	print 'POST Method' + email + ' : ' + password
 
     if request.method == 'GET':
         email = request.args.get('email')
