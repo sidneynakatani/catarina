@@ -35,8 +35,8 @@ def hello_name(name):
 def auth():
     
     if request.method == 'POST':
-    	#email = request.form['email'] 
-    	#password =  request.form['password']
+    	email = request.form['email'] 
+    	password =  request.form['password']
     	print 'POST Method'
 
     if request.method == 'GET':
