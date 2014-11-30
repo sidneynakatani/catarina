@@ -33,9 +33,19 @@ def hello_name(name):
 
 @app.route('/auth', methods = ['POST','GET'])
 def auth():
-    email = request.form['email'] 
-    password =  request.form['password']
+    
+    if request.method == 'POST':
+    	#email = request.form['email'] 
+    	#password =  request.form['password']
+    	print 'POST Method'
+
+    if request.method == 'GET':
+        email = request.args.get('email')
+        password = request.args.get('password')
+    	print 'GET Method'
+
     user = User.query.filter_by(email = email, password = password).first()
+
     if user is None:
         return 'Authorization denied'
 
