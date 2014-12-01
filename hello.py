@@ -1,11 +1,13 @@
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify, redirect, abort
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from db.connectionfactory import ConnectionFactory
 from model.user import User
 from model.post import Author
 
+
 app = Flask(__name__)
 app.secret_key = 'why would I tell you my secret key?'
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'home'
@@ -26,32 +28,38 @@ def test():
 
 
 
-@app.route('/<name>')
+@app.route('/author/<name>')
 @login_required
 def hello_name(name):
     author = Author.query.filter(Author.name == name).first()
-    return redirect(jsonify(name = author.name))
+    return jsonify(name = author.name)
 
 
 
 @app.route('/auth', methods = ['POST','GET'])
 def auth():
-    
-    if request.method == 'POST':
-    	#email = request.form['email'] 
-    	#password =  request.form['password']
-    	email = request.form.get('email','')
-	password = request.form.get('password','')
-	print 'POST Method' + email + ' : ' + password
 
-    if request.method == 'GET':
+    """  Post method:
+         Content-Type: application/x-www-form-urlencoded 
+    """
+    
+    content_type = request.headers['Content-Type']
+    method = request.method
+
+    print content_type + ' : ' + method
+
+    if method == 'POST':
+	email = request.form.get('email','')
+	password = request.form.get('password','')
+
+    if method == 'GET':
         email = request.args.get('email')
         password = request.args.get('password')
-    	print 'GET Method'
 
     user = User.query.filter_by(email = email, password = password).first()
 
     if user is None:
+        abort(401)
         return 'Authorization denied'
 
     login_user(user)
