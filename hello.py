@@ -1,9 +1,9 @@
-from flask import Flask, request, jsonify, redirect, abort
+from flask import Flask, request, jsonify, redirect, abort, json
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from db.connectionfactory import ConnectionFactory
 from model.user import User
 from model.post import Author
-
+from model.pet import Pet
 
 app = Flask(__name__)
 app.secret_key = 'why would I tell you my secret key?'
@@ -28,12 +28,25 @@ def test():
 
 
 
-@app.route('/author/<name>')
 @login_required
-def hello_name(name):
-    author = Author.query.filter(Author.name == name).first()
-    return jsonify(name = author.name)
+@app.route('/pet/get/<userId>', methods = ['GET'])
+def getPet(userId):
+    pet = Pet.query.filter(Pet.userId == userId).first()
+    return jsonify(pet_name = pet.petName, pet_img = pet.petImg, pet_location = pet.petLocation, description = pet.description)
 
+
+
+@login_required
+@app.route('/pet/add', methods = ['POST'])
+def addPet():
+    userId = request.json.get('userId')
+    petName = request.json.get('petName')
+    petImg = request.json.get('petImg')
+    petLocation = request.json.get('petLocation')
+    description = request.json.get('description')
+    pet = Pet(userId=userId, petName=petName, petImg=petImg, petLocation=petLocation, description=description)
+    pet.save()
+    return 'OK'
 
 
 @app.route('/auth', methods = ['POST','GET'])
