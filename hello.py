@@ -28,16 +28,16 @@ def test():
 
 
 
-@login_required
 @app.route('/pet/get/<userId>', methods = ['GET'])
+@login_required
 def getPet(userId):
     pet = Pet.query.filter(Pet.userId == userId).first()
     return jsonify(pet_name = pet.petName, pet_img = pet.petImg, pet_location = pet.petLocation, description = pet.description)
 
 
 
-@login_required
 @app.route('/pet/add', methods = ['POST'])
+@login_required
 def addPet():
     userId = request.json.get('userId')
     petName = request.json.get('petName')
@@ -49,8 +49,8 @@ def addPet():
     return 'OK'
 
 
-@app.route('/auth', methods = ['POST','GET'])
-def auth():
+@app.route('/login', methods = ['POST','GET'])
+def login():
 
     """  Post method:
          Content-Type: application/x-www-form-urlencoded 
@@ -79,12 +79,17 @@ def auth():
     return jsonify(auth = user.active)
 
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
+
 
 
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
 
 
 if __name__ == '__main__':
