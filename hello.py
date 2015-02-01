@@ -76,7 +76,7 @@ def login():
         return 'Authorization denied'
 
     login_user(user)
-    return jsonify(auth = user.active)
+    return jsonify(login = user.active)
 
 
 @app.route("/logout")
