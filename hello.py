@@ -59,7 +59,7 @@ def login():
     content_type = request.headers['Content-Type']
     method = request.method
 
-    print content_type + ' : ' + method
+    #print content_type + ' : ' + method
 
     if method == 'POST':
 	email = request.form.get('email','')
