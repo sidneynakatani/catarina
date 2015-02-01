@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+# coding=utf
 from flask import Flask, request, jsonify, redirect, abort, json
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from db.connectionfactory import ConnectionFactory
@@ -76,8 +78,8 @@ def login():
         return 'Authorization denied'
 
     login_user(user)
-    return jsonify(login = user.active)
-
+    #return jsonify(login = user.active)
+    return 'OK'
 
 @app.route("/logout")
 @login_required
