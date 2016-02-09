@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, redirect, abort, json
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from db.connectionfactory import ConnectionFactory
-from model.user import User
+from model.credential import Credential
 from model.post import Author
 from model.pet import Pet
 
@@ -69,14 +69,14 @@ def login():
         email = request.args.get('email')
         password = request.args.get('password')
 
-    user = User.query.filter_by(email = email, password = password).first()
+    credential = Credential.query.filter_by(email = email, password = password).first()
 
-    if user is None:
+    if credential is None:
         abort(401)
         return 'Authorization denied'
 
-    login_user(user)
-    return jsonify(login = user.active)
+    login_user(credential)
+    return jsonify(login = credential.active)
 
 @app.route("/logout")
 @login_required
