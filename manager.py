@@ -2,7 +2,8 @@ from db.connectionfactory import db
 from db.mongodbfactory import mongo
 from model.credential import Credential
 from model.post import Author 
-
+from model.key import Key
+import datetime
 #Test Postgree
 
 #db.drop_all(bind=None)
@@ -13,15 +14,17 @@ from model.post import Author
 #db.session.commit()
 
 
-a = Credential.query.filter_by(first_name='a', last_name='b').first()
-print a.last_name
-print a.active
+#a = Credential.query.filter_by(first_name='a', last_name='b').first()
+#print a.last_name
+#print a.active
 
 
 #Test Mongodb
 
-#mark_pilgrim = Author(name='Mark')
-#mark_pilgrim.save()
-#mark = Author.query.filter(Author.name == 'Mark Pilgrim').first()
-#print mark.name
+#key = Key(passKey='abcdef', createdAt=datetime.datetime.now())
+#key.save();
+
+#key = Key.query.filter(Key.passKey == 'abcdef').first()
+#print key.createdAt
+
 
