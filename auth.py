@@ -53,9 +53,9 @@ def login():
         abort(401)
         return 'Authorization denied'
 
-    generateKey()
+    hash = generateKey()
     login_user(credential)
-    return jsonify(login = credential.active)
+    return jsonify(login = credential.active, key= hash)
 
 @app.route('/signIn', methods = ['POST'])
 def signIn():
@@ -76,7 +76,7 @@ def generateKey():
     hash = hashlib.sha224(unicode(now)).hexdigest()
     key = Key(passKey = hash, createdAt = now)
     key.save();
-
+    return hash
 
 if __name__ == '__main__':
     app.run(debug=True)
