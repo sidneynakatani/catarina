@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, redirect, abort, json
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
-from db.connectionfactory import ConnectionFactory
+from db.connectionfactory import db
 from model.credential import Credential
 from model.key import Key
 import hashlib, datetime
@@ -57,6 +57,19 @@ def login():
     login_user(credential)
     return jsonify(login = credential.active)
 
+@app.route('/signIn', methods = ['POST'])
+def signIn():
+
+    email = request.form.get('email','')
+    password = request.form.get('password','')
+    firstName = request.form.get('firstName','')
+    lastName = request.form.get('lastName','')
+    createdAt = datetime.datetime.now()
+    credential = Credential(email, password, firstName, lastName, True, createdAt)
+    db.session.add(credential)
+    db.session.commit()
+   
+    return jsonify(created = True)
 
 def generateKey():
     now = datetime.datetime.now()

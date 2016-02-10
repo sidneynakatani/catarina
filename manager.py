@@ -9,7 +9,8 @@ import datetime
 #db.drop_all(bind=None)
 #db.create_all()
 
-#credential = Credential('admin@example.com', '123456', 'a', 'b', True)
+#now = datetime.datetime.now()
+#credential = Credential('admin@example.com', '123456', 'a', 'b', True, now)
 #db.session.add(credential)
 #db.session.commit()
 

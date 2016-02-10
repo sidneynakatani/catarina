@@ -12,13 +12,14 @@ class Credential(db.Model):
     active = db.Column(db.Boolean())
     update_date = db.Column(db.DateTime())
 
-    def __init__(self, email, password, first_name, last_name, active):
+    def __init__(self, email, password, first_name, last_name, active, update_date):
 
         self.email = email
         self.password = password
         self.first_name = first_name
 	self.last_name = last_name
         self.active = active
+        self.update_date = update_date
 
     
     def is_authenticated(self):
